@@ -175,9 +175,17 @@ function MyCitas(props) {
                     return (
                       <View style={styles.wrap}>
                         <View style={styles.row}>
+                          <Text style={styles.text1}>Estatus: </Text>
+                          <Text style={styles.text2}>{i.status}</Text>
+                        </View>
+
+
+                        <View style={styles.row}>
                           <Text style={styles.text1}>cirugía: </Text>
                           <Text style={styles.text2}>{i.cirugia}</Text>
                         </View>
+
+
                         <View style={styles.row}>
                           <Text style={styles.text1}>cirujano: </Text>
                           <Text style={styles.text2}>{i.cirujano}</Text>
