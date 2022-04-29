@@ -27,6 +27,9 @@ function MyCitas(props) {
   const [open2, setOpen2] = useState(false)
   const [open3, setOpen3] = useState(false)
   const [open4, setOpen4] = useState(false)
+  const [open5, setOpen5] = useState(false)
+  const [open6, setOpen6] = useState(false)
+  const [open7, setOpen7] = useState(false)
   const userDetails = React.useContext(UserContext)
   const { navigation } = props
 
@@ -75,6 +78,10 @@ function MyCitas(props) {
     try {
       return (
         <View style={styles.contained}>
+
+
+
+
           <View style={styles.group}>
             <TouchableOpacity style={open1 ? styles.headOpen : styles.headClose} onPress={() => { setOpen1(!open1) }}>
               <Icon style={styles.arrow} name={open1 === false ? 'arrow-ios-downward-outline' : 'arrow-ios-upward-outline'} width={20} height={20} fill={colorTertiary} />
@@ -96,7 +103,7 @@ function MyCitas(props) {
                 {
                   Citas.queries.map((i, key) => {
                     return (
-                      <View style={styles.wrap}>
+                      <View key={key} style={styles.wrap}>
                         <View style={styles.row}><Text style={styles.text1}>Fecha:</Text><Text style={styles.text2}>{i.fecha}</Text></View>
                         <View style={styles.row}><Text style={styles.text1}>Hora Inicio:</Text><Text style={styles.text2}>{i.time}</Text></View>
                         <View style={styles.row}><Text style={styles.text1}>Hora Fin: </Text><Text style={styles.text2}>{i.time_end}</Text></View>
@@ -116,6 +123,67 @@ function MyCitas(props) {
               </View>
             }
           </View>
+
+
+
+        
+
+
+          <View style={styles.group}>
+            <TouchableOpacity style={open5 ? styles.headOpen : styles.headClose} onPress={() => { setOpen5(!open5) }}>
+              <Icon style={styles.arrow} name={open5 === false ? 'arrow-ios-downward-outline' : 'arrow-ios-upward-outline'} width={20} height={20} fill={colorTertiary} />
+              {
+                Citas.preanesthesias !== [] && Citas.preanesthesias !== undefined &&
+                <View style={styles.number}>
+                  <Text style={styles.numberText}>
+                    {Citas.preanesthesias.length}
+                  </Text>
+                </View>
+              }
+              <Text style={styles.title}>Preanestesias</Text>
+            </TouchableOpacity>
+            {
+              open5 && !Load && Citas.preanesthesias !== [] && Citas.preanesthesias !== undefined &&
+              <View style={{ width: "100%" }}>
+                {
+                  Citas.preanesthesias.map((i, key) => {
+                    return (
+                      <View key={key} style={styles.wrap}>
+                        <View style={styles.row}>
+                          <Text style={styles.text1}>fecha: </Text>
+                          <Text style={styles.text2}>{i.fecha}</Text>
+                        </View>
+                        <View style={styles.row}>
+                          <Text style={styles.text1}>hora: </Text>
+                          <Text style={styles.text2}>{i.time}</Text>
+                        </View>
+                        <View style={styles.row}>
+                          <Text style={styles.text1}>lugar: </Text>
+                          <Text style={styles.text2}>{i.name_clinic}</Text>
+                        </View>
+                      </View>
+                    )
+                  })
+                }
+              </View>
+            }
+            {
+              open5 && !Load && Citas.preanesthesias.length == 0 &&
+              <View style={styles.wrap}>
+                <View style={{ borderColor: primaryColor, borderWidth: 1, padding: 10, borderRadius: 20, borderStyle: 'dashed', textAlign: "center", }}>
+                  <Text style={{ textAlign: "center", width: "100%", color: primaryColor, textTransform: "uppercase", fontSize: 12, }}>aun no hay citas de este tipo.</Text>
+                </View>
+              </View>
+            }
+          </View>
+
+
+
+
+
+
+
+          
           <View style={styles.group}>
             <TouchableOpacity style={open2 ? styles.headOpen : styles.headClose} onPress={() => { setOpen2(!open2) }}>
               <Icon style={styles.arrow} name={open2 === false ? 'arrow-ios-downward-outline' : 'arrow-ios-upward-outline'} width={20} height={20} fill={colorTertiary} />
@@ -135,7 +203,7 @@ function MyCitas(props) {
                 {
                   Citas.procedures.map((i, key) => {
                     return (
-                      <View style={styles.wrap}>
+                      <View key={key} style={styles.wrap}>
                         <View style={styles.row}><Text style={styles.text1}>Fecha: </Text><Text style={styles.text2}>{i.fecha}</Text></View>
                         <View style={styles.row}><Text style={styles.text1}>Especialista: </Text><Text style={styles.text2}>{i.surgeon}</Text></View>
                         <View style={styles.row}><Text style={styles.text1}>Lugar: </Text><Text style={styles.text2}>{i.name_clinic}</Text></View>
@@ -154,6 +222,13 @@ function MyCitas(props) {
               </View>
             }
           </View>
+
+
+
+
+
+
+
           <View style={styles.group}>
             <TouchableOpacity style={open3 ? styles.headOpen : styles.headClose} onPress={() => { setOpen3(!open3) }}>
               <Icon style={styles.arrow} name={open3 === false ? 'arrow-ios-downward-outline' : 'arrow-ios-upward-outline'} width={20} height={20} fill={colorTertiary} />
@@ -173,7 +248,7 @@ function MyCitas(props) {
                 {
                   Citas.revisiones.map((i, key) => {
                     return (
-                      <View style={styles.wrap}>
+                      <View key={key} style={styles.wrap}>
                         <View style={styles.row}>
                           <Text style={styles.text1}>Estatus: </Text>
                           <Text style={styles.text2}>{i.status}</Text>
@@ -225,6 +300,11 @@ function MyCitas(props) {
               </View>
             }
           </View>
+
+
+
+
+
           <View style={styles.group}>
             <TouchableOpacity style={open4 ? styles.headOpen : styles.headClose} onPress={() => { setOpen4(!open4) }}>
               <Icon style={styles.arrow} name={open4 === false ? 'arrow-ios-downward-outline' : 'arrow-ios-upward-outline'} width={20} height={20} fill={colorTertiary} />
@@ -244,7 +324,7 @@ function MyCitas(props) {
                 {
                   Citas.masajes.map((i, key) => {
                     return (
-                      <View style={styles.wrap}>
+                      <View key={key} style={styles.wrap}>
                         <View style={styles.row}>
                           <Text style={styles.text1}>fecha: </Text>
                           <Text style={styles.text2}>{i.fecha}</Text>
@@ -272,6 +352,115 @@ function MyCitas(props) {
               </View>
             }
           </View>
+
+
+
+
+
+
+
+          <View style={styles.group}>
+            <TouchableOpacity style={open6 ? styles.headOpen : styles.headClose} onPress={() => { setOpen6(!open6) }}>
+              <Icon style={styles.arrow} name={open6 === false ? 'arrow-ios-downward-outline' : 'arrow-ios-upward-outline'} width={20} height={20} fill={colorTertiary} />
+              {
+                Citas.camara_hiperbarica !== [] && Citas.camara_hiperbarica !== undefined &&
+                <View style={styles.number}>
+                  <Text style={styles.numberText}>
+                    {Citas.camara_hiperbarica.length}
+                  </Text>
+                </View>
+              }
+              <Text style={styles.title}>Cámara Hiperbarica</Text>
+            </TouchableOpacity>
+            {
+              open6 && !Load && Citas.camara_hiperbarica !== [] && Citas.camara_hiperbarica !== undefined &&
+              <View style={{ width: "100%" }}>
+                {
+                  Citas.camara_hiperbarica.map((i, key) => {
+                    return (
+                      <View key={key} style={styles.wrap}>
+                        <View style={styles.row}>
+                          <Text style={styles.text1}>fecha: </Text>
+                          <Text style={styles.text2}>{i.fecha}</Text>
+                        </View>
+                        <View style={styles.row}>
+                          <Text style={styles.text1}>hora: </Text>
+                          <Text style={styles.text2}>{i.time}</Text>
+                        </View>
+                        <View style={styles.row}>
+                          <Text style={styles.text1}>lugar: </Text>
+                          <Text style={styles.text2}>{i.name_clinic}</Text>
+                        </View>
+                      </View>
+                    )
+                  })
+                }
+              </View>
+            }
+            {
+              open6 && !Load && Citas.camara_hiperbarica.length == 0 &&
+              <View style={styles.wrap}>
+                <View style={{ borderColor: primaryColor, borderWidth: 1, padding: 10, borderRadius: 20, borderStyle: 'dashed', textAlign: "center", }}>
+                  <Text style={{ textAlign: "center", width: "100%", color: primaryColor, textTransform: "uppercase", fontSize: 12, }}>aun no hay citas de este tipo.</Text>
+                </View>
+              </View>
+            }
+          </View>
+
+
+
+
+          <View style={styles.group}>
+            <TouchableOpacity style={open7 ? styles.headOpen : styles.headClose} onPress={() => { setOpen7(!open7) }}>
+              <Icon style={styles.arrow} name={open7 === false ? 'arrow-ios-downward-outline' : 'arrow-ios-upward-outline'} width={20} height={20} fill={colorTertiary} />
+              {
+                Citas.nutricional !== [] && Citas.nutricional !== undefined &&
+                <View style={styles.number}>
+                  <Text style={styles.numberText}>
+                    {Citas.nutricional.length}
+                  </Text>
+                </View>
+              }
+              <Text style={styles.title}>Nutricional</Text>
+            </TouchableOpacity>
+            {
+              open7 && !Load && Citas.nutricional !== [] && Citas.nutricional !== undefined &&
+              <View style={{ width: "100%" }}>
+                {
+                  Citas.nutricional.map((i, key) => {
+                    return (
+                      <View key={key} style={styles.wrap}>
+                        <View style={styles.row}>
+                          <Text style={styles.text1}>fecha: </Text>
+                          <Text style={styles.text2}>{i.fecha}</Text>
+                        </View>
+                        <View style={styles.row}>
+                          <Text style={styles.text1}>hora: </Text>
+                          <Text style={styles.text2}>{i.time}</Text>
+                        </View>
+                        <View style={styles.row}>
+                          <Text style={styles.text1}>lugar: </Text>
+                          <Text style={styles.text2}>{i.name_clinic}</Text>
+                        </View>
+                      </View>
+                    )
+                  })
+                }
+              </View>
+            }
+            {
+              open7 && !Load && Citas.nutricional.length == 0 &&
+              <View style={styles.wrap}>
+                <View style={{ borderColor: primaryColor, borderWidth: 1, padding: 10, borderRadius: 20, borderStyle: 'dashed', textAlign: "center", }}>
+                  <Text style={{ textAlign: "center", width: "100%", color: primaryColor, textTransform: "uppercase", fontSize: 12, }}>aun no hay citas de este tipo.</Text>
+                </View>
+              </View>
+            }
+          </View>
+
+
+
+
         </View>
       )
     } catch (error) {
@@ -279,61 +468,9 @@ function MyCitas(props) {
     }
   }
 
+
   function vacio() {
-    if (Citas == undefined) {
-      return (
-        <View style={{
-          marginLeft: "10%",
-          width: "80%",
-          marginTop: 100,
-          borderColor: primaryColor,
-          borderWidth: 2,
-          padding: 10,
-          borderRadius: 20,
-          borderStyle: 'dashed',
-          textAlign: "center",
-        }}>
-          <Text style={{
-            textAlign: "center",
-            width: "100%",
-            color: primaryColor,
-            textTransform: "uppercase",
-            fontSize: 16,
-          }}>
-            lista de citas vacía
-        </Text>
-        </View>
-      )
-    }
-
-    if (Citas == []) {
-      return (
-        <View style={{
-          marginLeft: "10%",
-          width: "80%",
-          marginTop: 100,
-          borderColor: primaryColor,
-          borderWidth: 2,
-          padding: 10,
-          borderRadius: 20,
-          borderStyle: 'dashed',
-          textAlign: "center",
-        }}>
-          <Text style={{
-            textAlign: "center",
-            width: "100%",
-            color: primaryColor,
-            textTransform: "uppercase",
-            fontSize: 16,
-          }}>
-            lista de citas vacía
-          </Text>
-        </View>
-      )
-    }
-
-
-    if (Citas.length == 0) {
+    if (!Citas) {
       return (
         <View style={{
           marginLeft: "10%",
@@ -407,28 +544,21 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingBottom: 80
   },
-
-
   group: {
     marginHorizontal: 10,
     marginTop: 10,
     width: "100%",
     borderRadius: 0,
   },
-
-
-
   headOpen: {
     paddingVertical: 10,
     paddingHorizontal: 20,
     width: "100%",
     flexDirection: "row",
     backgroundColor: colorLight,
-   // borderRadius: 40
    borderTopLeftRadius:20,
    borderTopRightRadius:20
   },
-
   headClose: {
     paddingVertical: 10,
     paddingHorizontal: 20,
@@ -437,9 +567,6 @@ const styles = StyleSheet.create({
     backgroundColor: colorLight,
     borderRadius: 20
   },
-
-
-
   title: {
     lineHeight: 20,
     fontSize: 16,
@@ -447,16 +574,12 @@ const styles = StyleSheet.create({
     padding: 5,
     textTransform: "capitalize",
   },
-
-
   arrow: {
     marginRight: 15,
     top: 4,
     marginLeft: 5,
     marginRight: 5,
   },
-
-
   number: {
     left: 5,
     marginRight:10,
@@ -469,14 +592,10 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20
   },
-
-
   numberText: {
     lineHeight: 15,
     fontSize: 10,
   },
-
-
   wrap: {
     backgroundColor: "rgba(255,255,255,0.5)",
     padding: 10,
@@ -486,11 +605,9 @@ const styles = StyleSheet.create({
     marginTop: -6,
 
   },
-
   row: {
     flexDirection: "row"
   },
-
   text1: {
     fontWeight: "bold",
     fontSize: 15,
@@ -499,7 +616,6 @@ const styles = StyleSheet.create({
     paddingRight: 5,
     textTransform: "capitalize"
   },
-
   text2: {
     fontSize: 13
   }
